@@ -28,14 +28,13 @@
     <div id="map"></div>
     <script>
       const bounds = [
-        [100, 100],
-        [1050, 1800],
+        [0, 0],
+        [950, 1700], // Adjusted bounds to fit the image size
       ];
 
       const map = L.map("map", {
         crs: L.CRS.Simple,
         maxBounds: bounds,
-        minZoom: 0.1,
       });
 
       const image = L.imageOverlay("map.png", bounds).addTo(map);
