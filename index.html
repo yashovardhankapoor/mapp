@@ -39,7 +39,29 @@
 
       const image = L.imageOverlay("map.png", bounds).addTo(map);
 
+      const rectangleBounds = [
+        [700, 600],
+        [520, 500],
+      ];
+
+      const rectangle = L.rectangle(rectangleBounds, {
+        color: "blue",
+      }).addTo(map);
+
+      const tooltipContent =
+        '<a href="https://www.google.com" target="_blank">Click me to open Google</a>';
+      rectangle.bindTooltip(tooltipContent).openTooltip();
+
+      rectangle.on("click", function () {
+        window.open("https://www.google.com", "_blank");
+      });
+
       map.fitBounds(bounds);
     </script>
   </body>
 </html>
+
+<!-- map.on("contextmenu", function (event) {
+  console.log("user right-clicked on map coordinates: " + event.latlng.toString());
+  L.marker(event.latlng).addTo(map);
+}); -->
