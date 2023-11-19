@@ -21,6 +21,7 @@
       .leaflet-container {
         height: 100vh;
         width: 100vw;
+        background-color: #6989ba;
       }
     </style>
   </head>
@@ -42,7 +43,6 @@
       const shiftx1 = 550;
       const shifty1 = -340;
 
-
       const polygonCoordinates = [
         [210 + shiftx1, 713 + shifty1],
         [263 + shiftx1, 667 + shifty1],
@@ -53,13 +53,15 @@
       const polygon1 = L.polygon(polygonCoordinates, {
         color: "transparent",
       }).addTo(map);
-      
+
       const tooltipContent1 =
         '<a href="https://www.google.com" target="_blank">Click me to open Google</a>';
       polygon1.bindTooltip(tooltipContent1).openTooltip();
-      
+
       polygon1.on("mousedown", function (e) {
-        e.originalEvent.preventDefault();
+        if (e.originalEvent.target.tagName.toLowerCase() !== "a") {
+          e.originalEvent.preventDefault();
+        }
         window.open("https://www.google.com", "_blank");
       });
 
@@ -81,7 +83,9 @@
       polygon2.bindTooltip(tooltipContent2).openTooltip();
 
       polygon2.on("mousedown", function (e) {
-        e.originalEvent.preventDefault();
+        if (e.originalEvent.target.tagName.toLowerCase() !== "a") {
+          e.originalEvent.preventDefault();
+        }
       });
 
       map.fitBounds(bounds);
