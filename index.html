@@ -29,7 +29,7 @@
     <script>
       const bounds = [
         [0, 0],
-        [950, 1700], // Adjusted bounds to fit the image size
+        [950, 1700],
       ];
 
       const map = L.map("map", {
@@ -39,29 +39,52 @@
 
       const image = L.imageOverlay("map.png", bounds).addTo(map);
 
-      const rectangleBounds = [
-        [700, 600],
-        [520, 500],
+      const shiftx1 = 550;
+      const shifty1 = -340;
+
+
+      const polygonCoordinates = [
+        [210 + shiftx1, 713 + shifty1],
+        [263 + shiftx1, 667 + shifty1],
+        [209 + shiftx1, 543 + shifty1],
+        [117 + shiftx1, 611 + shifty1],
       ];
 
-      const rectangle = L.rectangle(rectangleBounds, {
-        color: "blue",
+      const polygon1 = L.polygon(polygonCoordinates, {
+        color: "transparent",
+      }).addTo(map);
+      
+      const tooltipContent1 =
+        '<a href="https://www.google.com" target="_blank">Click me to open Google</a>';
+      polygon1.bindTooltip(tooltipContent1).openTooltip();
+      
+      polygon1.on("mousedown", function (e) {
+        e.originalEvent.preventDefault();
+        window.open("https://www.google.com", "_blank");
+      });
+
+      const shiftx2 = 450;
+      const shifty2 = 1100;
+
+      const polygon2Coordinates = [
+        [295 + shiftx2, 170 + shifty2],
+        [367 + shiftx2, 139 + shifty2],
+        [350 + shiftx2, 310 + shifty2],
+        [260 + shiftx2, 330 + shifty2],
+      ];
+
+      const polygon2 = L.polygon(polygon2Coordinates, {
+        color: "transparent",
       }).addTo(map);
 
-      const tooltipContent =
-        '<a href="https://www.google.com" target="_blank">Click me to open Google</a>';
-      rectangle.bindTooltip(tooltipContent).openTooltip();
+      const tooltipContent2 = "Hover over me!";
+      polygon2.bindTooltip(tooltipContent2).openTooltip();
 
-      rectangle.on("click", function () {
-        window.open("https://www.google.com", "_blank");
+      polygon2.on("mousedown", function (e) {
+        e.originalEvent.preventDefault();
       });
 
       map.fitBounds(bounds);
     </script>
   </body>
 </html>
-
-<!-- map.on("contextmenu", function (event) {
-  console.log("user right-clicked on map coordinates: " + event.latlng.toString());
-  L.marker(event.latlng).addTo(map);
-}); -->
