@@ -59,9 +59,7 @@
       polygon1.bindTooltip(tooltipContent1).openTooltip();
 
       polygon1.on("mousedown", function (e) {
-        if (e.originalEvent.target.tagName.toLowerCase() !== "a") {
-          e.originalEvent.preventDefault();
-        }
+        e.originalEvent.stopPropagation(); // Stop event propagation
         window.open("https://www.google.com", "_blank");
       });
 
